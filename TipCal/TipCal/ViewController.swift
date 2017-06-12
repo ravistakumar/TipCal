@@ -20,8 +20,6 @@ class ViewController: UIViewController {
         var preferredStatusBarStyle: UIStatusBarStyle {
             return .lightContent
         }
-        
-        tipPercent.isSelected = false
     }
 
     override func didReceiveMemoryWarning() {
@@ -30,21 +28,27 @@ class ViewController: UIViewController {
     }
     
     @IBAction func percentCal(_ sender: UISegmentedControl) {
-            let amount = Double(amountBeforeTip.text!)
+        if let amount = Double(amountBeforeTip.text!){
             switch tipPercent.selectedSegmentIndex{
-            case 0: tipAmount.text = String(amount! * (15 / 100))
-            case 1: tipAmount.text = String(amount! * (25 / 100))
-            case 2: tipAmount.text = String(amount! * (30 / 100))
-            default: tipAmount.text = "Enter tip Amount"
+            case 0: tipAmount.text = String(amount * (15 / 100))
+            case 1: tipAmount.text = String(amount * (25 / 100))
+            case 2: tipAmount.text = String(amount * (30 / 100))
+            default: break
             }
+        } else {
+            tipAmount.text = "Enter amount."
+        }
         
     }
 
     @IBAction func calculate(_ sender: UIButton) {
-        let amount = Double(amountBeforeTip.text!)
-        let tip = Double(tipAmount.text!)
-        let totalBill = amount! + tip!
+        if let amount = Double(amountBeforeTip.text!),  let tip = Double(tipAmount.text!){
+        let totalBill = amount + tip
         totalAmount.text = " $ \(String(totalBill))"
+        } else {
+            totalAmount.text = "Enter amount."
+
+        }
     }
 
 }
