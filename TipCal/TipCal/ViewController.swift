@@ -20,6 +20,8 @@ class ViewController: UIViewController {
         var preferredStatusBarStyle: UIStatusBarStyle {
             return .lightContent
         }
+        
+        tipPercent.isSelected = false
     }
 
     override func didReceiveMemoryWarning() {
